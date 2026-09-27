@@ -1,27 +1,14 @@
 #BlueJ package file
-<<<<<<< HEAD
 objectbench.height=94
 objectbench.width=556
 package.divider.horizontal=0.6002132196162047
 package.divider.vertical=0.8933474128827877
 package.editor.height=839
 package.editor.width=818
-package.editor.x=786
-package.editor.y=75
+package.editor.x=84
+package.editor.y=104
 package.frame.height=1047
 package.frame.width=974
-=======
-objectbench.height=93
-objectbench.width=760
-package.divider.horizontal=0.6
-package.divider.vertical=0.8
-package.editor.height=393
-package.editor.width=644
-package.editor.x=125
-package.editor.y=380
-package.frame.height=600
-package.frame.width=800
->>>>>>> a04a8e588ba967d5e65b5747269a7b99094dff8a
 package.numDependencies=0
 package.numTargets=6
 package.showExtends=true
@@ -36,21 +23,20 @@ target1.name=Grassland
 target1.showInterface=false
 target1.type=UnitTestTargetJunit5
 target1.width=120
-target1.x=10
-target1.y=140
+target1.x=260
+target1.y=120
 target2.height=70
-target2.name=StormTest
+target2.name=Alientest
 target2.showInterface=false
 target2.type=UnitTestTargetJunit5
 target2.width=120
-target2.x=300
-target2.y=140
+target2.x=440
+target2.y=110
 target3.height=70
 target3.name=aceptacionalien
 target3.showInterface=false
 target3.type=ClassTarget
 target3.width=120
-<<<<<<< HEAD
 target3.x=248
 target3.y=301
 target4.height=70
@@ -74,7 +60,3 @@ target6.type=UnitTestTargetJunit5
 target6.width=120
 target6.x=10
 target6.y=110
-=======
-target3.x=150
-target3.y=140
->>>>>>> a04a8e588ba967d5e65b5747269a7b99094dff8a
