@@ -1,0 +1,7 @@
+#BlueJ class context
+#Sat Sep 26 22:15:38 COT 2026
+comment0.target=BushTest
+comment1.target=void AYoungBushDoesNotDisappearBeforeTwoTicsAlthoughThereIsAnElephantNeighbor()
+comment2.target=void aBushDisappearsIfItRemainsNeighborToAnElephantAfterTheGracePeriod()
+comment3.target=void theBushGetsYellowWhenHeIsOld()
+numComments=4

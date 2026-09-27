@@ -1,0 +1,13 @@
+#BlueJ class context
+#Sat Sep 26 22:27:59 COT 2026
+comment0.target=Bush
+comment0.text=\r\n Represents a bush in the EcoSafari.\r\n A bush is green while young and turns yellow after aging 4 tics.\r\n Once it is at least 2 tics old, on every tic it checks its four\r\n cardinal neighboring cells, in priority order North, South, East,\r\n West, and if any of them holds an Elephant, the bush is eaten and\r\n disappears.\r\n
+comment1.params=habitat row column
+comment1.target=Bush(EcoSafari, int, int)
+comment2.target=EcoSafari getHabitat()
+comment3.target=java.awt.Color getColor()
+comment4.target=void tic()
+comment5.target=void tac()
+comment6.target=boolean closeElephant()
+comment6.text=\r\n Determines whether there is an Elephant in one of the four\r\n cardinal neighboring cells (North, South, East, West).\r\n @return\r\n
+numComments=7
