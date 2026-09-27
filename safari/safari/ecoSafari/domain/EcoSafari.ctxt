@@ -1,5 +1,5 @@
 #BlueJ class context
-#Sun Sep 27 13:12:05 CST 2026
+#Sun Sep 27 15:33:13 CST 2026
 comment0.target=EcoSafari
 comment1.target=EcoSafari()
 comment1.text=\r\n Constructs a new EcoSafari\r\n
@@ -19,6 +19,7 @@ comment6.text=\r\n Places an entity at a specified position\r\n @param r the row
 comment7.params=e
 comment7.target=int[] find(Entity)
 comment7.text=\r\n Finds the position of a specified entity\r\n @param e the entity\r\n @return an array {row, column} if the entity is found. null otherwise\r\n
-comment8.target=void ticTac()
-comment8.text=\r\n Advances the simulation by one time step\r\n
-numComments=9
+comment8.target=Elephant findElephant()
+comment9.target=void ticTac()
+comment9.text=\r\n Advances the simulation by one time step\r\n
+numComments=10

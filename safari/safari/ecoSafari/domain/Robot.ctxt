@@ -1,8 +1,9 @@
 #BlueJ class context
 #Sun Sep 27 15:27:45 CST 2026
-comment0.target=Elephant
+comment0.target=Robot
+comment0.text=\r\n Write a description of class Robot here.\r\n \r\n @author (your name) \r\n @version (a version number or a date)\r\n
 comment1.params=habitat row column
-comment1.target=Elephant(EcoSafari, int, int)
+comment1.target=Robot(EcoSafari, int, int)
 comment2.target=EcoSafari getHabitat()
 comment3.target=java.awt.Color getColor()
 comment4.target=int shape()

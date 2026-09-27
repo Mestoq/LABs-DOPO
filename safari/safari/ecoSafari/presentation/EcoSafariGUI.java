@@ -16,7 +16,7 @@ public class EcoSafariGUI extends JFrame{
     private EcoSafari theEcoSafari;
    
     
-    private EcoSafariGUI() {
+    public EcoSafariGUI() {
         theEcoSafari=new EcoSafari();
         SIZE=theEcoSafari.getSize();
         prepareElements();
