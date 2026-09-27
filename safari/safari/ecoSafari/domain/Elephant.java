@@ -17,7 +17,7 @@ public class Elephant extends Organism implements Entity{
         return habitat;
     }
     
-    public final Color getColor(){
+    public Color getColor(){
         return(getEnergy()>=80? Color.DARK_GRAY: Color.LIGHT_GRAY);
     }
 
