@@ -1,0 +1,16 @@
+#BlueJ class context
+#Wed Sep 16 14:10:50 COT 2026
+comment0.target=Organism
+comment1.target=Organism()
+comment1.text=Create a new Organism\n
+comment2.params=value
+comment2.target=void changeEnergy(int)
+comment2.text=Changes the organism's energy level by a given value.\n @param value\n
+comment3.params=percentage
+comment3.target=void changeEnergy(float)
+comment3.text=Changes the organism's energy level by a given percentage.\n @param percentage \n @return \n
+comment4.target=int getEnergy()
+comment4.text=Returns the energy\n@return \n
+comment5.target=boolean isOrganism()
+comment5.text=Returns that it is an organism\n @return\n
+numComments=6

@@ -1,0 +1,11 @@
+#BlueJ class context
+#Fri Sep 18 07:37:29 COT 2026
+comment0.target=EcoSafariGUI
+comment1.target=EcoSafariGUI()
+comment2.target=void prepareElements()
+comment3.target=void prepareActions()
+comment4.target=void ticTacButtonAction()
+comment5.target=domain.EcoSafari gettheEcoSafari()
+comment6.params=args
+comment6.target=void main(java.lang.String[])
+numComments=7

@@ -1,0 +1,24 @@
+#BlueJ class context
+#Wed Sep 16 15:47:57 COT 2026
+comment0.target=EcoSafari
+comment1.target=EcoSafari()
+comment1.text=\n Constructs a new EcoSafari\n
+comment2.target=void someEntities()
+comment2.text=\n Pupulates the EcoSafari with some entities\n
+comment3.target=int getSize()
+comment3.text=\n Returns the size of the EcoSafari \n @return \n
+comment4.params=r c
+comment4.target=boolean isInside(int, int)
+comment4.text=\n Determines whether a position is inside the EcoSafari\n @param r the row\n @param c the column\n @return \n
+comment5.params=r c
+comment5.target=Entity get(int, int)
+comment5.text=\n Returns the entity located at a specified position\n @param r the row\n @param c the column\n @return \n
+comment6.params=e r c
+comment6.target=void set(Entity, int, int)
+comment6.text=\n Places an entity at a specified position\n @param r the row\n @param c the column\n
+comment7.params=e
+comment7.target=int[] find(Entity)
+comment7.text=\n Finds the position of a specified entity\n @param e the entity\n @return an array {row, column} if the entity is found. null otherwise\n
+comment8.target=void ticTac()
+comment8.text=\n Advances the simulation by one time step\n
+numComments=9

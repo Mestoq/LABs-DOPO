@@ -1,0 +1,13 @@
+#BlueJ class context
+#Wed Sep 16 15:47:57 COT 2026
+comment0.target=Entity
+comment1.target=void tic()
+comment2.target=void tac()
+comment3.target=int shape()
+comment4.target=java.awt.Color getColor()
+comment5.target=boolean isOrganism()
+comment6.target=EcoSafari getHabitat()
+comment7.target=boolean disappear()
+comment8.params=deltaRows deltaColumns
+comment8.target=boolean move(int, int)
+numComments=9
