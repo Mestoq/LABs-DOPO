@@ -17,8 +17,9 @@ public class EcoSafari{
     /**
      * Pupulates the EcoSafari with some entities
      */
-    public void someEntities(){   
- 
+    public void someEntities(){  
+         Elephant dumbo = new Elephant(this, 5, 5);
+         Elephant babar = new Elephant(this, 10, 10);
     }
     
     /**
@@ -85,6 +86,22 @@ public class EcoSafari{
     //First, all entities execute their tic() action
     //Then, all entities execute their tac() actions
     public void ticTac(){  
+        //primero hacemos el tic, nos guiamos en la logica del find que ya estaba definido cambiando solo lo que haga el tic y tac 
+        for (int fila=0; fila < SIZE; fila++){
+            for (int columna=0; columna < SIZE; columna++){
+                if (cells[fila][columna] !=null){
+                    cells[fila][columna].tic();
+                }
+            }
+        }
+        // el mismo codigo anterior pero con tac
+        for (int fila=0; fila < SIZE; fila++){
+            for (int columna=0; columna < SIZE; columna++){
+                if (cells[fila][columna] !=null){
+                    cells[fila][columna].tac();
+                }
+            }
+        }        
     }
 
 }
