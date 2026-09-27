@@ -45,7 +45,7 @@ public class Storm implements Entity{
             getHabitat().set(null, r, c);
             getHabitat().set(this, nr, nc);
 
-            afectarArea(nr, nc, size);
+            afectadArea(nr, nc, size);
         }
         hasActed = true;
     }
@@ -58,7 +58,7 @@ public class Storm implements Entity{
      * Marks the eight neighboring cells of the given center gray,
      * only where they are currently empty.
      */
-    private void afectarArea(int centroFila, int centroColumna, int size){
+    private void afectadArea(int centroFila, int centroColumna, int size){
         int[][] vecinos = {{-1,-1}, {-1,0}, {-1,1}, {0,-1}, {0,1}, {1,-1}, {1,0}, {1,1}};
         for (int[] d : vecinos){
             int fr = (centroFila + d[0] + size) % size;

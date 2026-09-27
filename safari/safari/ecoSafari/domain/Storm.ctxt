@@ -1,5 +1,5 @@
 #BlueJ class context
-#Sun Sep 27 13:54:32 COT 2026
+#Sun Sep 27 15:17:46 COT 2026
 comment0.target=Storm
 comment0.text=\r\n Represents a basic Storm in the EcoSafari.\r\n Its center moves circularly (wrapping around the grid) in a\r\n diagonal northeast direction, one cell per tic. It destroys\r\n whatever it finds in its new center, and marks the affected\r\n area (diameter three, i.e. its eight neighboring cells) gray\r\n wherever those cells are empty, leaving occupied cells untouched.\r\n
 comment1.params=habitat row column
@@ -9,6 +9,6 @@ comment3.target=java.awt.Color getColor()
 comment4.target=void tic()
 comment5.target=void tac()
 comment6.params=centroFila centroColumna size
-comment6.target=void afectarArea(int, int, int)
+comment6.target=void afectadArea(int, int, int)
 comment6.text=\r\n Marks the eight neighboring cells of the given center gray,\r\n only where they are currently empty.\r\n
 numComments=7
