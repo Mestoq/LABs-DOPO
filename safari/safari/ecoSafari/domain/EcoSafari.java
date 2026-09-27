@@ -22,6 +22,8 @@ public class EcoSafari{
          Elephant babar = new Elephant(this, 10, 10);
          Bush mopane = new Bush(this, 18, 18);
          Bush acacia = new Bush(this, 20, 20);
+         Storm thor = new Storm(this, 15, 15);
+         Storm tempest = new Storm(this, 1, 23);
          Alienelephant Orozco = new Alienelephant(this, 2, 2);
          Alienelephant Davila = new Alienelephant(this, 7, 7);
     }
