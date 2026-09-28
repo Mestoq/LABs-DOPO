@@ -26,6 +26,8 @@ public class EcoSafari{
          Storm tempest = new Storm(this, 1, 23);
          Alienelephant Orozco = new Alienelephant(this, 2, 2);
          Alienelephant Davila = new Alienelephant(this, 7, 7);
+         Robot Juan = new Robot(this, 24,24);
+         Robot David = new Robot(this, 4, 4);
     }
     
     /**
@@ -85,6 +87,16 @@ public class EcoSafari{
        return position;
     }
     
+    public Elephant findElephant(){
+        for (int fila=0; fila < SIZE; fila++){
+            for (int columna=0; columna < SIZE; columna++){
+                if (cells[fila][columna] instanceof Elephant){
+                    return(Elephant) cells[fila][columna];
+                }
+            }
+        } 
+        return null;
+    }
  
     /**
      * Advances the simulation by one time step
