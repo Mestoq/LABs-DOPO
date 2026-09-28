@@ -1,10 +1,10 @@
 #BlueJ class context
-#Sun Sep 27 16:11:13 CST 2026
+#Sun Sep 27 20:05:50 CST 2026
 comment0.target=robottest
 comment0.text=\r\n The test class robottest.\r\n\r\n @author  (your name)\r\n @version (a version number or a date)\r\n
 comment1.target=robottest()
 comment1.text=\r\n Default constructor for test class robottest\r\n
-comment2.target=void contruccion()
-comment3.target=void consumorobot()
-comment4.target=void robotsemueve()
+comment2.target=void construction()
+comment3.target=void energylost()
+comment4.target=void robotmoves()
 numComments=5

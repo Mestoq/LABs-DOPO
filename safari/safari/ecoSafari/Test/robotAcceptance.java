@@ -9,7 +9,7 @@ import presentation.*;
  * @version (a version number or a date)
  */
 // se ve graficamente como el robot va a suvir para acercarse al elefante
-public class aceptacionrobot
+public class robotAcceptance
 {
     public static void main(String[] args){
         EcoSafariGUI gui = new EcoSafariGUI();

@@ -22,7 +22,7 @@ public class robottest
     public robottest(){}
     //el robot se crea correctamente en safari
     @Test
-    public void contruccion(){
+    public void construction(){
             EcoSafari safari = new EcoSafari();
             Robot robot = new Robot(safari, 4, 4);
             assertEquals(100, robot.getEnergy());
@@ -32,7 +32,7 @@ public class robottest
     }
     //se consume energia
     @Test
-    public void consumorobot(){
+    public void energylost(){
             EcoSafari safari = new EcoSafari();
             Robot robot = new Robot(safari, 24, 24);
             robot.tic();
@@ -40,7 +40,7 @@ public class robottest
     }
     //el robot se mueve donde el elefante
     @Test
-    public void robotsemueve(){
+    public void robotmoves(){
             EcoSafari safari = new EcoSafari();
             Robot robot = new Robot(safari, 10, 10);
             robot.tic();

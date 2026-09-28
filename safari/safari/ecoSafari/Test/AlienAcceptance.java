@@ -9,7 +9,7 @@ import presentation.*;
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class aceptacionalien
+public class AlienAcceptance
 {
     public static void main(String[] args){
         EcoSafariGUI gui = new EcoSafariGUI();

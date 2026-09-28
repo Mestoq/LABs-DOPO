@@ -21,27 +21,27 @@ public class Alientest
     public Alientest(){}
         //testeamos que se mueva correctamente
         @Test 
-        public void sedebemover2enuntic(){
+        public void correctmove(){
             EcoSafari safari = new EcoSafari();
-            Alienelephant alien = new Alienelephant(safari, 2, 2);
+            Alienelephant alien = new Alienelephant(safari, 5, 20);
             safari.ticTac();
             int[] nuevaPos = safari.find(alien);
             assertNotNull(nuevaPos);
-            assertEquals(4, nuevaPos[0]);
-            assertEquals(3, nuevaPos[1]);
+            assertEquals(7, nuevaPos[0]);
+            assertEquals(21, nuevaPos[1]);
         }
-        
+        //se va reduciendo la energia
         @Test 
-        public void sedebereducirenergiaen20(){
+        public void energyreduction(){
             EcoSafari safari = new EcoSafari();
             Alienelephant alien = new Alienelephant(safari, 2, 2);
             int energiaInicial= alien.getEnergy();
             safari.ticTac();
             assertEquals(energiaInicial - 20, alien.getEnergy());
         }
-        
+        //elelefante desaparece correctamente
         @Test
-        public void desaparicioncorrecta(){
+        public void disappear(){
             EcoSafari safari = new EcoSafari();
             Alienelephant alien = new Alienelephant(safari, 2, 2);
             alien.changeEnergy(-80);

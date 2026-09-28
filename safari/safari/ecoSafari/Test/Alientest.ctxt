@@ -1,12 +1,12 @@
 #BlueJ class context
-#Sun Sep 27 13:27:22 CST 2026
+#Sun Sep 27 20:07:13 CST 2026
 comment0.target=Alientest
 comment0.text=\r\n The test class Alientest.\r\n\r\n @author  (your name)\r\n @version (a version number or a date)\r\n
 comment1.target=Alientest()
 comment1.text=\r\n Default constructor for test class Alientest\r\n
-comment2.target=void sedebemover2enuntic()
-comment3.target=void sedebereducirenergiaen20()
-comment4.target=void desaparicioncorrecta()
+comment2.target=void correctmove()
+comment3.target=void energyreduction()
+comment4.target=void disappear()
 comment5.target=void setUp()
 comment5.text=\r\n Sets up the test fixture.\r\n\r\n Called before every test case method.\r\n
 comment6.target=void tearDown()
