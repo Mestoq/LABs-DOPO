@@ -1,0 +1,11 @@
+#BlueJ class context
+#Sun Sep 27 22:20:28 COT 2026
+comment0.target=Grass
+comment1.params=habitat row column
+comment1.target=Grass(EcoSafari, int, int)
+comment2.target=EcoSafari getHabitat()
+comment3.target=java.awt.Color getColor()
+comment4.target=void tic()
+comment5.target=boolean disappear()
+comment5.text=\r\n When grass disappears (eaten), it is replaced by land.\r\n
+numComments=6

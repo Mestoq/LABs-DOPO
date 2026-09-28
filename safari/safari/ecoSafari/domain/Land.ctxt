@@ -1,0 +1,15 @@
+#BlueJ class context
+#Sun Sep 27 22:20:28 COT 2026
+comment0.target=Land
+comment1.params=habitat row column
+comment1.target=Land(EcoSafari, int, int)
+comment1.text=\r\n Creates land that grows grass with the default probability (10%)\r\n
+comment2.params=habitat row column grassProbability
+comment2.target=Land(EcoSafari, int, int, double)
+comment3.target=EcoSafari getHabitat()
+comment4.target=java.awt.Color getColor()
+comment5.target=void tic()
+comment6.target=void tac()
+comment7.params=entity
+comment7.target=boolean replace(Entity)
+numComments=8

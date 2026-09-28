@@ -1,0 +1,13 @@
+#BlueJ class context
+#Sun Sep 27 22:13:03 COT 2026
+comment0.target=Lion
+comment1.params=habitat row column
+comment1.target=Lion(EcoSafari, int, int)
+comment2.target=java.awt.Color getColor()
+comment3.target=int steps()
+comment4.params=entity
+comment4.target=boolean isFood(Entity)
+comment5.target=int foodEnergyPercent()
+comment6.params=row column
+comment6.target=Animal newborn(int, int)
+numComments=7

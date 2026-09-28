@@ -1,14 +1,13 @@
 #BlueJ class context
-#Sun Sep 27 19:40:36 COT 2026
+#Sun Sep 27 22:13:03 COT 2026
 comment0.target=Storm
-comment0.text=\r\n Represents a basic Storm in the EcoSafari.\r\n Its center moves circularly (wrapping around the grid) in a\r\n diagonal northeast direction, one cell per tic. It destroys\r\n whatever it finds in its new center, and marks the affected\r\n area (diameter three, i.e. its eight neighboring cells) gray\r\n wherever those cells are empty, leaving occupied cells untouched.\r\n
 comment1.params=habitat row column
 comment1.target=Storm(EcoSafari, int, int)
 comment2.target=EcoSafari getHabitat()
 comment3.target=java.awt.Color getColor()
 comment4.target=void tic()
 comment5.target=void tac()
-comment6.params=centroFila centroColumna size
+comment6.params=centerRow centerColumn size
 comment6.target=void afectedArea(int, int, int)
-comment6.text=\r\n Marks the eight neighboring cells of the given center gray. A\r\n cell is marked when it is empty, or when it already holds one\r\n of this Storm's own StormMark instances (safe to refresh, since\r\n both the old and the new mark are gray); real entities in the\r\n area are left untouched.\r\n
+comment6.text=\r\n the cells suroinding the center are given center gray color\r\n the cell is marked when it is empty,real entities in the\r\n area will left untouched.\r\n
 numComments=7

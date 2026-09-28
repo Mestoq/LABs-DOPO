@@ -1,12 +1,7 @@
 package domain;
 import java.awt.Color;
 
-/**
- * Write a description of class Alienelephant here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
- */
+
 public class Alienelephant extends Elephant{
     private boolean hasActed;
     

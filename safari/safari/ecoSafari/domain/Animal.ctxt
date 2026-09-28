@@ -1,0 +1,22 @@
+#BlueJ class context
+#Sun Sep 27 22:20:43 COT 2026
+comment0.target=Animal
+comment1.params=habitat row column
+comment1.target=Animal(EcoSafari, int, int)
+comment10.target=boolean disappearDead()
+comment11.target=boolean step()
+comment12.target=void eat()
+comment13.target=void reproduce()
+comment14.params=row column
+comment14.target=boolean hasMateNextTo(int, int)
+comment2.target=EcoSafari getHabitat()
+comment3.target=int shape()
+comment4.target=int steps()
+comment5.params=entity
+comment5.target=boolean isFood(Entity)
+comment6.target=int foodEnergyPercent()
+comment7.params=row column
+comment7.target=Animal newborn(int, int)
+comment8.target=void tic()
+comment9.target=void tac()
+numComments=15
