@@ -30,17 +30,19 @@ public class Series extends Content{
    */
    @Override
    public int rating() throws NeoFlixException{
-       int sumaraiting = 0;
+       int sumaraiting=0;
        if (episodes.size()==0) throw new NeoFlixException(NeoFlixException.CONTENT_EMPTY);
-       if (episodes == null) throw new NeoFlixException(NeoFlixException.CONTENT_EMPTY);
-       for (Episode ep : episodes){
+       if (episodes==null) throw new NeoFlixException(NeoFlixException.CONTENT_EMPTY);
+       for (Episode epi : episodes){
            try{
-                int raiting = ep.rating();
-                if (raiting ==-1) throw new NeoFlixException(NeoFlixException.VALUE_UNKNOWN);
-                sumaraiting += sumaraiting;
+                sumaraiting += epi.rating();
             } catch(NeoFlixException excepcion){
-                System.err.println(excepcion.getMessage());
-                throw new NeoFlixException(NeoFlixException.DATA_ERROR);
+                if(excepcion.getMessage().equals(NeoFlixException.VALUE_UNKNOWN)){
+                    throw new NeoFlixException(NeoFlixException.VALUE_UNKNOWN);
+                }
+                else{
+                    throw new NeoFlixException(NeoFlixException.DATA_ERROR);
+                }
             }
         }
         return sumaraiting/ episodes.size();
@@ -54,18 +56,67 @@ public class Series extends Content{
    */
 
    public int rating(int default_) throws NeoFlixException{
-       return 0;
+       int sumaraiting=0;
+       int contador=0;
+       for (Episode epi : episodes){
+           try{
+                sumaraiting += epi.rating();
+                contador++;
+            } catch(NeoFlixException excepcion){
+                if(excepcion.getMessage().equals(NeoFlixException.VALUE_UNKNOWN)){
+                    //cuando no tiene valoracion se usa la que es por defecto 
+                    sumaraiting += default_;
+                    contador++;
+                }//no incluimos el else ya que basicamente si hay un error ignora el episodio y sigu con el siguiente
+            }
+        }
+        if (contador == 0) throw new NeoFlixException(NeoFlixException.VALUE_UNKNOWN);//basicamente si salta esto es que fue imposible calcular el raiting
+        return sumaraiting/contador;
+
    }
  
    //If an episode has no rating, use the average of the previous episodes or of all episodes, depending on the value of the previous parameter.
    //Throw CONTENT_EMPTY and VALUE_UNKNOWN if either of these cases occurs.
    public int rating(boolean previous) throws NeoFlixException{
-        return 0;
+       if (episodes.size()==0) throw new NeoFlixException(NeoFlixException.CONTENT_EMPTY);
+       int suma_total=0;    //suma de todos los puntaajes
+       int suma_puntuacion_conocida=0; //suma de los puntajes que se conocen
+       int puntuaciones_conocidas=0;  //la cantidad de puntajes que se conocen
+       int ep_sin_puntuacion=0; //la cantidad de episodios que no tieneun puntaje 
+       for (Episode epi : episodes){
+           try{
+                int resultado= epi.rating();
+                suma_total += resultado;
+                suma_puntuacion_conocida += resultado;
+                puntuaciones_conocidas++;
+            } catch(NeoFlixException excepcion){
+                if(!excepcion.getMessage().equals(NeoFlixException.VALUE_UNKNOWN)){
+                    throw new NeoFlixException(NeoFlixException.VALUE_UNKNOWN);
+                }
+                if(previous){
+                    if (puntuaciones_conocidas==0) throw new NeoFlixException(NeoFlixException.VALUE_UNKNOWN);
+                    suma_total+=suma_puntuacion_conocida/puntuaciones_conocidas;
+                }
+                else{
+                    ep_sin_puntuacion++;
+                }
+            }
+        }
+        if(!previous){
+            if (puntuaciones_conocidas==0) throw new NeoFlixException(NeoFlixException.VALUE_UNKNOWN);
+            suma_total+=ep_sin_puntuacion*(suma_puntuacion_conocida/puntuaciones_conocidas); //basicamente este es el promedio de todos 
+        }
+        return suma_total/episodes.size();
    }
     
-   
+   @Override
    public int popularity() throws NeoFlixException{
-       return 0;
+       if (episodes.size()==0) throw new NeoFlixException(NeoFlixException.CONTENT_EMPTY);
+       int suma=0;
+       for (Episode epi: episodes){
+            suma += epi.popularity();
+        }
+        return suma/episodes.size();
    }
     
     
