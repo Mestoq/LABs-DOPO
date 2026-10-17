@@ -1,0 +1,24 @@
+#BlueJ class context
+#Fri Oct 16 22:32:17 COT 2026
+comment0.target=NeoFlixAcceptanceTest
+comment0.text=\r\n Pruebas de ACEPTACION (Parte II.B). Manejan la GUI real de NeoFlix\:\r\n escriben en los campos, pulsan los botones y leen lo que se ve en pantalla.\r\n\r\n
+comment1.target=void setUp()
+comment10.target=void AC2_shouldAddANewEpisode()
+comment11.target=void AC3_shouldAddANewSeries()
+comment12.target=void AC4_shouldShowDuplicatesWithoutWarning()
+comment2.target=void tearDown()
+comment3.params=name
+comment3.target=java.lang.Object field(java.lang.String)
+comment4.params=fieldName text
+comment4.target=void type(java.lang.String, java.lang.String)
+comment5.params=buttonName
+comment5.target=void click(java.lang.String)
+comment6.params=title attempts completed votes sumVotes
+comment6.target=void addEpisode(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)
+comment7.params=title year episodes
+comment7.target=void addSeries(java.lang.String, java.lang.String, java.lang.String)
+comment7.text=Llena el formulario como una serie y pulsa Adicionar.
+comment8.target=java.lang.String list()
+comment8.text=Pulsa Listar y devuelve lo que se ve en pantalla.
+comment9.target=void AC1_shouldListTheInitialContents()
+numComments=13

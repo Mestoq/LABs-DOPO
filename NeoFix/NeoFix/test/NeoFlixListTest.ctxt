@@ -1,0 +1,13 @@
+#BlueJ class context
+#Fri Oct 16 21:38:55 COT 2026
+comment0.target=NeoFlixListTest
+comment1.target=void setUp()
+comment2.target=void shouldListTheSampleContents()
+comment3.target=void shouldStartTheListWithTheNumberOfContents()
+comment4.target=void shouldIndentTheEpisodesOfASeriesWithATab()
+comment5.target=void shouldListTheSameWhenCalledTwice()
+comment6.target=void shouldIncludeAnAddedEpisodeInTheList()
+comment7.target=void shouldListContentsInInsertionOrder()
+comment8.target=void shouldListZeroElementsWhenNothingIsSelected()
+comment9.target=void shouldListOnlyTheSelectedContents()
+numComments=10

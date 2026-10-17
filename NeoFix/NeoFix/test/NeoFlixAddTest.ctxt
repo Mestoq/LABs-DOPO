@@ -1,0 +1,14 @@
+#BlueJ class context
+#Fri Oct 16 22:11:12 COT 2026
+comment0.target=NeoFlixAddTest
+comment0.text=\r\n Pruebas de unidad (ingenieria inversa) de la funcionalidad ADICIONAR\r\n de la capa de dominio\: NeoFlix.addEpisode(...) y NeoFlix.addSeries(...).\r\n
+comment1.target=void setUp()
+comment2.target=void shouldStartWithTheSampleContents()
+comment3.target=void shouldAddAnEpisode()
+comment4.target=void shouldBeAbleToConsultAnAddedEpisode()
+comment5.target=void shouldConsultAnAddedEpisodeIgnoringCase()
+comment6.target=void shouldAddASeriesWithExistingEpisodes()
+comment7.target=void shouldBeAbleToConsultAnAddedSeries()
+comment8.target=void shouldAllowAnEpisodeWithAnExistingTitle()
+comment9.target=void shouldAllowASeriesWithAnExistingTitle()
+numComments=10
