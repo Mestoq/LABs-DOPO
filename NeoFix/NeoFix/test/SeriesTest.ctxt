@@ -1,11 +1,16 @@
 #BlueJ class context
+#Thu Oct 15 21:35:24 CST 2026
 comment0.target=SeriesTest
-comment1.params=
-comment1.target=void\ shouldCalculateSeriessRating()
-comment2.params=
-comment2.target=void\ shouldThrowExceptionIfTheSeriessHasNoEpisodes()
-comment3.params=
-comment3.target=void\ shouldThrowExceptionWhenAnEpisodeRatingIsUnknown()
-comment4.params=
-comment4.target=void\ shouldThrowExceptionIfAEpisodeContainsInvalidRatingData()
-numComments=5
+comment1.target=void shouldCalculateSeriessRating()
+comment10.target=void shouldcalculateseriespopularity()
+comment11.target=void shouldthrowcontentemptyinpopularity()
+comment12.target=void shouldpropagatedataerrorinpopularity()
+comment2.target=void shouldThrowExceptionIfTheSeriessHasNoEpisodes()
+comment3.target=void shouldThrowExceptionWhenAnEpisodeRatingIsUnknown()
+comment4.target=void shouldThrowExceptionIfAEpisodeContainsInvalidRatingData()
+comment5.target=void shouldusedefaultforunknownandignoreErrors()
+comment6.target=void shouldThrowunknownifdefaultratingcnnotbecalculated()
+comment7.target=void shoulduseverageofpreviousepisodes()
+comment8.target=void shoulduseverageofllepisodes()
+comment9.target=void shouldthrowunknowniffirstepisodeunknownandprevious()
+numComments=13
