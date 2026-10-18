@@ -29,21 +29,25 @@ public class NeoFlix{
     private void addSomeSeries(){
         
         String [][] episodes= {{"The Hidden Village","199","120","50","430"},
-                               {"The First Mission","126","140","60","510"},
-                               {"The Rival","199","120","50","430"},
-                               {"The Tournament","162","180", "90", "810"},
-                               {"The Final Battle","190", "200", "120", "1080"}};
+                       {"The First Mission","140","126","60","510"},
+                       {"The Rival","199","120","50","430"},
+                       {"The Tournament","180","162", "90", "810"},
+                       {"The Final Battle","200", "190", "120", "1080"}};
         StringBuffer titles=new StringBuffer();
         for (String [] e : episodes){
             titles.append(e[0]+"\n");
         }
-        
+
+        String [][] series = {{"The Neo Ninja", "2020", titles.toString()}};
+        try{
         for (String [] e: episodes){
             addEpisode(e[0],"?", e[1],e[2],e[3],e[4]);
         }
-        String [][] series = {{"The Neo Ninja", "2020", titles.toString()}};
         for (String [] s: series){
             addSeries(s[0],s[1],s[2]);
+        }
+        }catch(NeoFlixException e){
+        Log.record(e);
         }
 
 
@@ -65,17 +69,25 @@ public class NeoFlix{
 
     
     /**
-    * Adds a new episode.
-    * @param title
-    * @param series
-    * @param attempts
-    * @param completed
-    * @param votes
-    * @param sumVotes
-    */
-    public void addEpisode(String title, String series, String attempts, String completed, String votes, String sumVotes){ 
+     * Adds a new episode.
+     * @param title
+     * @param series
+     * @param attempts
+     * @param completed
+     * @param votes
+     * @param sumVotes
+     * @throws NeoFlixException INCONSISTENT_DATA if completed > attempts or sumVotes > votes*10
+     */
+    public void addEpisode(String title, String series, String attempts, String completed, String votes, String sumVotes) throws NeoFlixException{ 
+        int theAttempts = Integer.parseInt(attempts);
+        int theCompleted = Integer.parseInt(completed);
+        int theVotes = Integer.parseInt(votes);
+        int theSumVotes = Integer.parseInt(sumVotes);
+        if (theCompleted > theAttempts || theSumVotes > theVotes * 10){ 
+        throw new NeoFlixException(NeoFlixException.INCONSISTENT_DATA);
+        }
         Series s = (Series) consult(series);
-        Episode e=new Episode(title,s, Integer.parseInt(attempts), Integer.parseInt(completed), Integer.parseInt(votes), Integer.parseInt(sumVotes));
+        Episode e=new Episode(title,s, theAttempts, theCompleted, theVotes, theSumVotes);
         contents.add(e);
         episodes.put(title.toUpperCase(),e); 
     }
@@ -86,9 +98,21 @@ public class NeoFlix{
      * @param title
      * @param year
      * @param theEpisodes the titles of the episodes separated by newlines
-    */
-    public void addSeries(String title, String year, String theEpisodes){ 
-        Series s = new Series(title,Integer.parseInt(year));
+     */
+    public void addSeries(String title, String year, String theEpisodes) throws NeoFlixException{
+        if (title.trim().isEmpty()){ 
+            throw new NeoFlixException(NeoFlixException.NOT_NULL_VALUES);
+        }
+        if (consult(title) != null){ 
+        throw new NeoFlixException(NeoFlixException.SERIES_ALREADY_EXIST);
+        }
+        int theYear;
+        try{
+            theYear = Integer.parseInt(year);
+        }catch(NumberFormatException e){
+            throw new NeoFlixException(NeoFlixException.NOT_VALID_FORMAT);
+        }
+        Series s = new Series(title,theYear);
         String [] aEpisodes= theEpisodes.split("\n");
         for (String te : aEpisodes){
             s.addEpisode(episodes.get(te.toUpperCase()));

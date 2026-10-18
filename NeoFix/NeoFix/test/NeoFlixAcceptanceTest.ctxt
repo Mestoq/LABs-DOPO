@@ -1,5 +1,5 @@
 #BlueJ class context
-#Fri Oct 16 22:32:17 COT 2026
+#Sat Oct 17 14:51:37 COT 2026
 comment0.target=NeoFlixAcceptanceTest
 comment0.text=\r\n Pruebas de ACEPTACION (Parte II.B). Manejan la GUI real de NeoFlix\:\r\n escriben en los campos, pulsan los botones y leen lo que se ve en pantalla.\r\n\r\n
 comment1.target=void setUp()

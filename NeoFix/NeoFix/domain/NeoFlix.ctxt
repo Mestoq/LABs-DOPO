@@ -1,5 +1,5 @@
 #BlueJ class context
-#Mon Oct 12 22:32:12 COT 2026
+#Sat Oct 17 23:54:35 COT 2026
 comment0.target=NeoFlix
 comment0.text=\r\n NeoFlix\r\n @author DOPO\r\n @version ECI 2026\r\n
 comment1.target=NeoFlix()
@@ -13,7 +13,7 @@ comment3.target=Content consult(java.lang.String)
 comment3.text=\r\n Consult a contents\r\n @param name\r\n
 comment4.params=title series attempts completed votes sumVotes
 comment4.target=void addEpisode(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)
-comment4.text=\r\n Adds a new episode.\r\n @param title\r\n @param series\r\n @param attempts\r\n @param completed\r\n @param votes\r\n @param sumVotes\r\n
+comment4.text=\r\n Adds a new episode.\r\n @param title\r\n @param series\r\n @param attempts\r\n @param completed\r\n @param votes\r\n @param sumVotes\r\n @throws NeoFlixException INCONSISTENT_DATA if completed > attempts or sumVotes > votes*10\r\n
 comment5.params=title year theEpisodes
 comment5.target=void addSeries(java.lang.String, java.lang.String, java.lang.String)
 comment5.text=\r\n Add a new series\r\n @param title\r\n @param year\r\n @param theEpisodes the titles of the episodes separated by newlines\r\n

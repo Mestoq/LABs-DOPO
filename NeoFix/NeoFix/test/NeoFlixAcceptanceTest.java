@@ -125,4 +125,6 @@ public class NeoFlixAcceptanceTest{
         assertTrue(screen.startsWith("8 elementos\n"));
         assertEquals(2, screen.split(">The Neo Ninja", -1).length - 1);
     }
+    
+
 }

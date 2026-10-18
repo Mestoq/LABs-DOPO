@@ -1,8 +1,20 @@
 #BlueJ class context
-#Fri Oct 16 22:11:12 COT 2026
+#Sat Oct 17 23:52:25 COT 2026
 comment0.target=NeoFlixAddTest
 comment0.text=\r\n Pruebas de unidad (ingenieria inversa) de la funcionalidad ADICIONAR\r\n de la capa de dominio\: NeoFlix.addEpisode(...) y NeoFlix.addSeries(...).\r\n
 comment1.target=void setUp()
+comment10.target=void shouldDenyASeriesWithAnExistingTitle()
+comment10.text=\r\nPruebas para el caso uno de la parte II.C.i\r\n \r\n
+comment11.target=void shouldWarnAboutTheWrongTypeOfData()
+comment11.text=\r\nPruebas para el caso uno de la parte II.C.ii\r\n \r\n
+comment12.target=void shouldDenyAnEpisodeWithMoreCompletedThanAttempts()
+comment12.text=\r\nPruebas para el caso uno de la parte II.C.iii\r\n
+comment13.target=void shouldDenyAnEpisodeWithSumVotesGreaterThanTenTimesVotes()
+comment14.target=void shouldDenyASeriesWithAnEmptyName()
+comment14.text=\r\n Pruebas para el caso uno de la parte II.C.iv\r\n
+comment15.target=void shouldDenyASeriesWithABlankName()
+comment16.target=void shouldAddASeriesWithAName()
+comment16.text=\r\n Prueba de ejecuci\u00F3n normal\r\n
 comment2.target=void shouldStartWithTheSampleContents()
 comment3.target=void shouldAddAnEpisode()
 comment4.target=void shouldBeAbleToConsultAnAddedEpisode()
@@ -11,4 +23,4 @@ comment6.target=void shouldAddASeriesWithExistingEpisodes()
 comment7.target=void shouldBeAbleToConsultAnAddedSeries()
 comment8.target=void shouldAllowAnEpisodeWithAnExistingTitle()
 comment9.target=void shouldAllowASeriesWithAnExistingTitle()
-numComments=10
+numComments=17
