@@ -44,6 +44,7 @@ public class NeoFlixGUI extends JFrame{
         neoFlix=new NeoFlix();
         prepareElements();
         prepareActions();
+        prepareErrorHandling();
     }
 
 
@@ -235,14 +236,42 @@ public class NeoFlixGUI extends JFrame{
     private void actionSearch(){
         String patronBusqueda=textSearch.getText();
         String answer = "";
-        if(patronBusqueda.length() > 0) {
-            answer = neoFlix.search(patronBusqueda);
+        try{
+            if(patronBusqueda.length() > 0) {
+                answer = neoFlix.search(patronBusqueda);
+            }
+        }catch(Exception e){
+            Log.record(e);
+            answer = "Ocurrio un error inesperado al consultar.\nIntente de nuevo;.";
         }
         textResults.setText(answer);
-    } 
+    }
     
    public static void main(String args[]){
        NeoFlixGUI gui=new NeoFlixGUI();
        gui.setVisible(true);
-   }    
+   }
+   
+    /**
+     * Garantiza que cualquier error inesperado de la presentacion se registre
+     * y se avise al usuario, sin cerrar la aplicacion
+     */
+    private void prepareErrorHandling(){
+        Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler(){
+            public void uncaughtException(Thread thread, Throwable e){
+                handleUnexpected(e);
+            }
+        });
+    }
+    
+    private void handleUnexpected(Throwable e){
+        Log.record(e instanceof Exception ? (Exception) e : new Exception(e));
+        SwingUtilities.invokeLater(new Runnable(){
+            public void run(){
+                JOptionPane.showMessageDialog(NeoFlixGUI.this,
+                    "Ocurrio un error inesperado.",
+                    "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        });
+    }
 }

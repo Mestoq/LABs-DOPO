@@ -1,5 +1,5 @@
 #BlueJ class context
-#Sat Oct 17 23:20:55 COT 2026
+#Sun Oct 18 15:37:14 COT 2026
 comment0.target=NeoFlixGUI
 comment0.text=\r\n @version ECI 2026\r\n
 comment1.target=NeoFlixGUI()
@@ -18,7 +18,14 @@ comment16.target=void actionAdd()
 comment17.target=void actionSearch()
 comment18.params=args
 comment18.target=void main(java.lang.String[])
+comment19.target=void prepareErrorHandling()
+comment19.text=\r\n Garantiza que cualquier error inesperado de la presentacion se registre\r\n y se avise al usuario, sin cerrar la aplicacion\r\n
 comment2.target=void prepareElements()
+comment20.params=thread e
+comment20.target=void uncaughtException(java.lang.Thread, java.lang.Throwable)
+comment21.params=e
+comment21.target=void handleUnexpected(java.lang.Throwable)
+comment22.target=void run()
 comment3.target=javax.swing.JPanel prepareAreaList()
 comment4.target=javax.swing.JPanel prepareAreaAdd()
 comment5.target=javax.swing.JPanel prepareSearchArea()
@@ -29,4 +36,4 @@ comment8.params=ev
 comment8.target=void actionPerformed(java.awt.event.ActionEvent)
 comment9.params=ev
 comment9.target=void actionPerformed(java.awt.event.ActionEvent)
-numComments=19
+numComments=23

@@ -44,5 +44,5 @@ target4.name=NeoFlixAddTest
 target4.showInterface=false
 target4.type=UnitTestTargetJunit4
 target4.width=120
-target4.x=630
-target4.y=229
+target4.x=840
+target4.y=200

@@ -20,6 +20,7 @@ public class NeoFlix{
         contents = new ArrayList<Content>();
         episodes = new TreeMap<String,Episode>();
         addSomeSeries();
+        
     }
 
     
@@ -102,6 +103,11 @@ public class NeoFlix{
     public void addSeries(String title, String year, String theEpisodes) throws NeoFlixException{
         if (title.trim().isEmpty()){ 
             throw new NeoFlixException(NeoFlixException.NOT_NULL_VALUES);
+        }
+        for (String te : theEpisodes.split("\n")){
+            if (episodes.get(te.toUpperCase()) == null){ 
+            throw new NeoFlixException(NeoFlixException.EPISODE_NOT_FOUND);
+            }
         }
         if (consult(title) != null){ 
         throw new NeoFlixException(NeoFlixException.SERIES_ALREADY_EXIST);

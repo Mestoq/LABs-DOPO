@@ -1,0 +1,9 @@
+#BlueJ class context
+#Sun Oct 18 10:43:43 COT 2026
+comment0.target=NeoFlixSearchTest
+comment0.text=\r\n Pruebas de unidad (ingenieria inversa) de la funcionalidad Buscar\r\n \r\n
+comment1.target=void setUp()
+comment2.target=void shouldSelectEverythingStartingWithT()
+comment3.target=void shouldSelectOnlyTheMatchingContentIgnoringCase()
+comment4.target=void shouldFindNothingWhenNoTitleMatches()
+numComments=5

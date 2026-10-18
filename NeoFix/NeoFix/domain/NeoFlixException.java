@@ -16,6 +16,7 @@ public class NeoFlixException extends Exception{
     public static final String NOT_VALID_FORMAT="formato numerico no valido";
     public static final String INCONSISTENT_DATA="datos inconsistentes";
     public static final String NOT_NULL_VALUES="el nombre no puede estar vacio";
+    public static final String EPISODE_NOT_FOUND="el episodio no existe";
     
     public NeoFlixException(String message){
         super(message);
