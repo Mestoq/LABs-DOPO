@@ -2,8 +2,10 @@ package presentation;
 
 import javax.swing.*;
 import java.awt.event.*;
+import java.io.File;
 
 public class HungrySnakeGUI extends JFrame {
+
 
 	public HungrySnakeGUI() {
 		setTitle("HungrySnake");
@@ -17,8 +19,8 @@ public class HungrySnakeGUI extends JFrame {
 		setLocationRelativeTo(null);
 
 
-		JMenuBar sankeMenu = PrepareViewMenu();
-		prepareControllerMenu(sankeMenu);
+		JMenuBar snakeMenu = PrepareViewMenu();
+		prepareControllerMenu(snakeMenu);
 	}
 
 	private void prepareController() {
@@ -47,6 +49,36 @@ public class HungrySnakeGUI extends JFrame {
 		}
 	}
 
+	private void openAction() {
+		JFileChooser fileChooser = new JFileChooser();
+		int seleccion = fileChooser.showOpenDialog(this);
+
+		if (seleccion == JFileChooser.APPROVE_OPTION) {
+			File archivoSeleccionado = fileChooser.getSelectedFile();
+			JOptionPane.showMessageDialog(
+					this,
+					"La funcionalidad de ABRIR está en construcción.\nArchivo seleccionado: " + archivoSeleccionado.getName(),
+					"En construcción",
+					JOptionPane.INFORMATION_MESSAGE
+			);
+		}
+	}
+
+	private void actionSave() {
+		JFileChooser fileChooser = new JFileChooser();
+		int seleccion = fileChooser.showSaveDialog(this);
+
+		if (seleccion == JFileChooser.APPROVE_OPTION) {
+			File archivoSeleccionado = fileChooser.getSelectedFile();
+			JOptionPane.showMessageDialog(
+					this,
+					"La funcionalidad de GUARDAR está en construcción.\nArchivo seleccionado: " + archivoSeleccionado.getName(),
+					"En construcción",
+					JOptionPane.INFORMATION_MESSAGE
+			);
+		}
+	}
+
 
 	private void prepareControllerMenu(JMenuBar sankeMenu) {
 
@@ -58,6 +90,21 @@ public class HungrySnakeGUI extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				confirmExit();
+			}
+		});
+		JMenuItem open = archivo.getItem(1);
+		open.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				openAction();
+			}
+		});
+
+		JMenuItem save = archivo.getItem(2);
+		save.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				actionSave();
 			}
 		});
 	}
@@ -81,6 +128,7 @@ public class HungrySnakeGUI extends JFrame {
 
 		return snakeMenu;
 	}
+
 
 	public static void main(String[] argumentos) {
 		HungrySnakeGUI pantalla = new HungrySnakeGUI();
