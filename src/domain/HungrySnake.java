@@ -13,17 +13,17 @@ public class HungrySnake{
 
 	public HungrySnake(int f, int c, int num_frutas, int porcentaje_obstaculos){
 		if (f<3 || c<3){
-			trow new argumentException("El tablero como minimo debe ser de 3x3")
+			throw new argumentException("El tablero como minimo debe ser de 3x3");
 		}
 		if (num_frutas<1){
-			trow new argumentException("debe haber al menos una fruta");
+			throw new argumentException("debe haber al menos una fruta");
 		}
 		if (porcentaje_obstaculos<0 || porcentaje_obstaculos > 100){
-			trow new argumentException("el porcentaje debe ser entre 0 y 100");
+			throw new argumentException("el porcentaje debe ser entre 0 y 100");
 		}
 		int obstaculos = f * c * porcentaje_obstaculos/100;
 		if (obstaculos + frutas > f * c-1){
-			trow new argumentException("no hay espacios para tantas frutas y obstaculos en el tablero");
+			throw new argumentException("no hay espacios para tantas frutas y obstaculos en el tablero");
 		}
 		filas= f;
 		columnas= c;
@@ -31,31 +31,31 @@ public class HungrySnake{
 		elementos = new char[f][c];
 		for (int i=0; i<f; i++){
 			for(int j=0; j<c; j++){
-				items[i][j]='';
+				elementos[i][j]= ' ';
 			}
 		
 		}
 		//iniciaamos la serpiente en el centro
-		filasSnake = new int[f*c]<
+		filasSnake = new int[f * c];
 		columnasSnake =new int[f*c];
 		filasSnake[0]= f/2;
 		columnasSnake[0]= c/2;
 		length=1;
 		
 		//se generan los obstaculos y frutas en casillas desocupadas aleatoriamente
-		int puesto=0
+		int puesto=0;
 		while (puesto < obstaculos + frutas){
 			int i = random.nextInt(f);
 			int j = random.nextInt(c);
 			boolean juego_empezado = (i == filasSnake[0] && j == columnasSnake[0]);
-			if (elementos[i][j] == '' && !juego_empezado){
+			if (elementos[i][j] == ' ' && !juego_empezado){
 				if (puesto<obstaculos){
 					elementos[i][j]='o';
 				}
 				else {
 					elementos[i][j]='f';
 				}
-				puesto++
+				puesto++;
 			}
 
 		}	
@@ -65,19 +65,19 @@ public class HungrySnake{
 		int d_fila = 0;
 		int d_columna = 0;
 		if (d== 'A'){
-			d_fila =-1
+			d_fila =-1;
 		}
 		if (d== 'D'){
-			d_fila =1
+			d_fila =1;
 		}
 		if (d== 'S'){
-			d_columna =-1
+			d_columna =-1;
 		}
 		if (d== 'W'){
-			d_columna =1
+			d_columna =1;
 		} 
 		else{
-			trow new argumentException("Direccion invalida" +d);
+			throw new argumentException("Direccion invalida" +d);
 		}
 		int nueva_fila=	filasSnake[0] + d_fila;
 		int nueva_columna= columnasSnake[0] + d_columna;
@@ -91,7 +91,7 @@ public class HungrySnake{
 			return false;
 		}
 		//obstaculo
-		if (items([nueva_fila][nueva_columna] == 'o'){
+		if (elementos[nueva_fila][nueva_columna] == 'o'){
 			return false;
 		}
 		boolean comer = (elementos[nueva_fila][nueva_columna]=='f');
@@ -128,7 +128,7 @@ public class HungrySnake{
 			int libre=0;
 			for (int i = 0; i < filas; i++){
 				for (int j = 0; j < columnas; j++){
-					if (elementos[i][j] == '' && !ocupado[i][j]){
+					if (elementos[i][j] == ' ' && !ocupado[i][j]){
 						libre++;
 					}
 				}
@@ -138,7 +138,7 @@ public class HungrySnake{
 				while (!placed){
 					int i = random.nextInt(filas);
 					int j = random.nextInt(columnas);
-					if(elementos[i][j] == '' && !ocupado[i][j]){
+					if(elementos[i][j] == ' ' && !ocupado[i][j]){
 						elementos[i][j] = "f";
 						puesto = true;
 					}	
@@ -162,7 +162,7 @@ public class HungrySnake{
 				resultado[i][j] = elementos[i][j];
 			}
 		}
-		for (int k = 1; k < length: k++){
+		for (int k = 1; k < length; k++){
 			resultado[filasSnake[k]][columnasSnake[k]] = 'S';
 		}
 		resultado[filasSnake[0]][columnasSnake[0]] = 'H';
