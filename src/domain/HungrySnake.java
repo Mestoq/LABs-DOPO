@@ -13,17 +13,17 @@ public class HungrySnake{
 
 	public HungrySnake(int f, int c, int num_frutas, int porcentaje_obstaculos){
 		if (f<3 || c<3){
-			throw new argumentException("El tablero como minimo debe ser de 3x3");
+			throw new IllegalArgumentException("El tablero como minimo debe ser de 3x3");
 		}
 		if (num_frutas<1){
-			throw new argumentException("debe haber al menos una fruta");
+			throw new IllegalArgumentException("debe haber al menos una fruta");
 		}
 		if (porcentaje_obstaculos<0 || porcentaje_obstaculos > 100){
-			throw new argumentException("el porcentaje debe ser entre 0 y 100");
+			throw new IllegalArgumentException("el porcentaje debe ser entre 0 y 100");
 		}
 		int obstaculos = f * c * porcentaje_obstaculos/100;
-		if (obstaculos + frutas > f * c-1){
-			throw new argumentException("no hay espacios para tantas frutas y obstaculos en el tablero");
+		if (obstaculos + num_frutas > f * c-1){
+			throw new IllegalArgumentException("no hay espacios para tantas frutas y obstaculos en el tablero");
 		}
 		filas= f;
 		columnas= c;
@@ -44,7 +44,7 @@ public class HungrySnake{
 		
 		//se generan los obstaculos y frutas en casillas desocupadas aleatoriamente
 		int puesto=0;
-		while (puesto < obstaculos + frutas){
+		while (puesto < obstaculos + num_frutas){
 			int i = random.nextInt(f);
 			int j = random.nextInt(c);
 			boolean juego_empezado = (i == filasSnake[0] && j == columnasSnake[0]);
@@ -64,20 +64,20 @@ public class HungrySnake{
 		d= Character.toUpperCase(d);
 		int d_fila = 0;
 		int d_columna = 0;
-		if (d== 'A'){
+		if (d== 'W'){
 			d_fila =-1;
 		}
-		if (d== 'D'){
+		else if (d== 'S'){
 			d_fila =1;
 		}
-		if (d== 'S'){
+		else if (d== 'A'){
 			d_columna =-1;
 		}
-		if (d== 'W'){
+		else if (d== 'D'){
 			d_columna =1;
 		} 
 		else{
-			throw new argumentException("Direccion invalida" +d);
+			throw new IllegalArgumentException("Direccion invalida" +d);
 		}
 		int nueva_fila=	filasSnake[0] + d_fila;
 		int nueva_columna= columnasSnake[0] + d_columna;
@@ -121,7 +121,7 @@ public class HungrySnake{
 		// si la fruta se come, desaparece la fruta y aparece otra en una casilla libre 
 		if (comer){
 			elementos[nueva_fila][nueva_columna] = ' ';
-			boolean[][] ocupado = new boolean[rows][columns];
+			boolean[][] ocupado = new boolean[filas][columnas];
 			for (int k = 0; k < length; k++){
 				ocupado[filasSnake[k]][columnasSnake[k]] = true;
 			}
@@ -135,11 +135,11 @@ public class HungrySnake{
 			}
 			if (libre > 0){
 				boolean puesto = false;
-				while (!placed){
+				while (!puesto){
 					int i = random.nextInt(filas);
 					int j = random.nextInt(columnas);
 					if(elementos[i][j] == ' ' && !ocupado[i][j]){
-						elementos[i][j] = "f";
+						elementos[i][j] = 'f';
 						puesto = true;
 					}	
 				}
@@ -166,6 +166,6 @@ public class HungrySnake{
 			resultado[filasSnake[k]][columnasSnake[k]] = 'S';
 		}
 		resultado[filasSnake[0]][columnasSnake[0]] = 'H';
-		return resutado;
+		return resultado;
 	}
 }

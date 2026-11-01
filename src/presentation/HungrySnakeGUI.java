@@ -1,5 +1,7 @@
 package presentation;
 
+import domain.HungrySnake;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -9,6 +11,17 @@ public class HungrySnakeGUI extends JFrame {
 
 	// ---------- Constantes ----------
 	private static final int BOARD_SIZE = 15;
+	private static final int FRUTAS = 1;
+	private static final int PORCENTAJE_OBSTACULOS = 2;
+	private static final int DELAY_MS = 150; //esto es para cada cuanto avnaza la snake
+
+	// modelo y estado 
+	private HungrySnake game;
+	private char direction; //WASD para moverse si es ' ' todavia no se mueve
+	private boolean gameOver;
+	private boolean wasRunning;
+	private int ticks;
+	private Timer timer;
 
 	// ---------- Atributos de la vista ----------
 	private JPanel infoPanel;
@@ -26,9 +39,15 @@ public class HungrySnakeGUI extends JFrame {
 	private Color boardColor = new Color(53, 53, 53);
 	private Color snakeColor = new Color(60, 170, 70);
 	private Color foodColor = new Color(200, 40, 40);
+	private Color obstacleColor = Color.LIGHT_GRAY;
+	
 
 	public HungrySnakeGUI() {
 		setTitle("HungrySnake");
+		game= new HungrySnake(BOARD_SIZE, BOARD_SIZE, FRUTAS, PORCENTAJE_OBSTACULOS);
+		direction = ' ';
+		gameOver = false;
+		ticks = 0;
 		prepareView();
 		prepareController();
 	}
@@ -95,22 +114,32 @@ public class HungrySnakeGUI extends JFrame {
 	 * usando los colores configurados actualmente.
 	 */
 	private void refresh() {
+		char[][] tablero = game.board();
 		for (int fila = 0; fila < BOARD_SIZE; fila++) {
 			for (int col = 0; col < BOARD_SIZE; col++) {
-				cells[fila][col].setBackground(boardColor);
+				char elemento = tablero[fila][col];
+				if (elemento == 'o'){
+					cells[fila][col].setBackground(obstacleColor);
+				}
+				else if (elemento == 'f'){
+					cells[fila][col].setBackground(foodColor);
+				}
+				else if (elemento == 'S'){
+					cells[fila][col].setBackground(snakeColor);
+				}
+				else if (elemento == 'H'){
+					cells[fila][col].setBackground(snakeColor.darker());
+				}
+				else{	
+					cells[fila][col].setBackground(boardColor);
+				}
 			}
 		}
 
-		int centro = BOARD_SIZE / 2;
-
-		// Serpiente inicial: cuerpo con snakeColor, cabeza un tono más oscuro
-		cells[centro][centro - 2].setBackground(snakeColor);
-		cells[centro][centro - 1].setBackground(snakeColor);
-		cells[centro][centro].setBackground(snakeColor.darker());
-
-		// Comida inicial
-		cells[centro][centro + 4].setBackground(foodColor);
-
+		int segundos = ticks * DELAY_MS / 1000;
+		scoreLabel.setText("Puntaje: " + (game.size() -1));
+		lengthLabel.setText("Longitud: " + game.size());
+		timeLabel.setText(String.format("Tiempo: %02d:%02d", segundos / 60, segundos% 60));
 		boardPanel.revalidate();
 		boardPanel.repaint();
 	}
@@ -124,9 +153,90 @@ public class HungrySnakeGUI extends JFrame {
 				confirmExit();
 			}
 		});
+		// se mueve con WASD
+		setFocusable(true);
+		addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				int tecla = e.getKeyCode();
+				if (tecla == KeyEvent.VK_UP || tecla == KeyEvent.VK_W) {
+					changeDirection('W');
+				} else if (tecla == KeyEvent.VK_DOWN || tecla == KeyEvent.VK_S) {
+					changeDirection('S');
+				} else if (tecla == KeyEvent.VK_LEFT || tecla == KeyEvent.VK_A) {
+					changeDirection('A');
+				} else if (tecla == KeyEvent.VK_RIGHT || tecla == KeyEvent.VK_D) {
+					changeDirection('D');
+				}
+			}
+		});
+
+		// Reloj: en cada tick la serpiente avanza una casilla
+		timer = new Timer(DELAY_MS, new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				step();
+			}
+		});
+	}
+
+	// Guarda la direccion pedida; la primera vez tambien arranca el reloj
+	private void changeDirection(char newDirection) {
+		if (gameOver) {
+			return;
+		}
+		direction = newDirection;
+		if (!timer.isRunning()) {
+			timer.start();
+			statusLabel.setText("Jugando...");
+		}
+	}
+
+	// Un paso del juego: el modelo mueve y la vista se actualiza
+	private void step() {
+		boolean sigueVivo = game.move(direction);
+		ticks++;
+		refresh();
+		if (!sigueVivo) {
+			gameOver = true;
+			timer.stop();
+			statusLabel.setText("Fin del juego. Menu > Nuevo para jugar otra vez.");
+			JOptionPane.showMessageDialog(
+					this,
+					"¡Perdiste! Tamaño final de la serpiente: " + game.size(),
+					"Fin del juego",
+					JOptionPane.INFORMATION_MESSAGE
+			);
+		}
+	}
+
+	private void newGame() {
+		timer.stop();
+		game = new HungrySnake(BOARD_SIZE, BOARD_SIZE, FRUTAS, PORCENTAJE_OBSTACULOS);
+		direction = ' ';
+		gameOver = false;
+		ticks = 0;
+		refresh();
+		statusLabel.setText("Listo. Use las flechas o W, A, S, D para empezar a jugar.");
+		requestFocusInWindow();
+	}
+
+	// Mientras hay un dialogo abierto el juego se detiene
+	private void pauseGame() {
+		wasRunning = timer.isRunning();
+		timer.stop();
+	}
+
+	private void resumeGame() {
+		if (wasRunning) {
+			timer.start();
+		}
+		wasRunning = false;
+		requestFocusInWindow();
 	}
 
 	private void confirmExit() {
+		pauseGame();
 		int respuesta = JOptionPane.showConfirmDialog(
 				HungrySnakeGUI.this,
 				"¿Seguro que quiere salir de la aplicación?",
@@ -139,9 +249,11 @@ public class HungrySnakeGUI extends JFrame {
 			dispose();
 			System.exit(0);
 		}
+		resumeGame();
 	}
 
 	private void openAction() {
+		pauseGame();
 		JFileChooser fileChooser = new JFileChooser();
 		int seleccion = fileChooser.showOpenDialog(this);
 
@@ -149,14 +261,16 @@ public class HungrySnakeGUI extends JFrame {
 			File archivoSeleccionado = fileChooser.getSelectedFile();
 			JOptionPane.showMessageDialog(
 					this,
-					"La funcionalidad de ABRIR está en construcción.\nArchivo seleccionado: " + archivoSeleccionado.getName(),
+					"La funcion de abrir está en construcción.\nArchivo seleccionado: " + archivoSeleccionado.getName(),
 					"En construcción",
 					JOptionPane.INFORMATION_MESSAGE
 			);
 		}
+		resumeGame();
 	}
 
 	private void actionSave() {
+		pauseGame();
 		JFileChooser fileChooser = new JFileChooser();
 		int seleccion = fileChooser.showSaveDialog(this);
 
@@ -169,6 +283,7 @@ public class HungrySnakeGUI extends JFrame {
 					JOptionPane.INFORMATION_MESSAGE
 			);
 		}
+		resumeGame();
 	}
 
 	/**
@@ -176,7 +291,9 @@ public class HungrySnakeGUI extends JFrame {
 	 * o el color actual si el usuario cancela.
 	 */
 	private Color chooseColor(String titulo, Color actual) {
+		pauseGame();
 		Color elegido = JColorChooser.showDialog(this, titulo, actual);
+		resumeGame();
 		return (elegido != null) ? elegido : actual;
 	}
 
@@ -202,6 +319,17 @@ public class HungrySnakeGUI extends JFrame {
 		}
 	}
 
+	private void changeObstacleColorAction() {
+		Color nuevo = chooseColor("Color de los obstáculos", obstacleColor);
+		if (!nuevo.equals(obstacleColor)) {
+			obstacleColor = nuevo;
+			refresh();
+			statusLabel.setText("Color de los obstáculos actualizado.");
+		} else {
+			statusLabel.setText("Color de los obstáculos sin cambios.");
+		}
+	}
+
 	private void changeBoardColorAction() {
 		Color nuevo = chooseColor("Color del tablero", boardColor);
 		if (!nuevo.equals(boardColor)) {
@@ -216,6 +344,13 @@ public class HungrySnakeGUI extends JFrame {
 
 	private void prepareControllerMenu(JMenuBar snakeMenu) {
 		JMenu archivo = snakeMenu.getMenu(0);
+		
+		archivo.getItem(0).addActionListener(new ActionListener() {
+    		@Override
+    		public void actionPerformed(ActionEvent e) {
+        		newGame();
+    		}
+		});
 
 		archivo.getItem(1).addActionListener(new ActionListener() {
 			@Override
@@ -257,6 +392,13 @@ public class HungrySnakeGUI extends JFrame {
 		colores.getItem(2).addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				changeObstacleColorAction();
+			}
+		});
+
+		colores.getItem(3).addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
 				changeBoardColorAction();
 			}
 		});
@@ -274,6 +416,7 @@ public class HungrySnakeGUI extends JFrame {
 		JMenu colores = new JMenu("Colores");
 		colores.add(new JMenuItem("Serpiente..."));
 		colores.add(new JMenuItem("Comida..."));
+		colores.add(new JMenuItem("Obstaculos..."));
 		colores.add(new JMenuItem("Tablero..."));
 
 		snakeMenu.add(archivo);
