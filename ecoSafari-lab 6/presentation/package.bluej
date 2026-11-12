@@ -1,0 +1,27 @@
+#BlueJ package file
+objectbench.height=133
+objectbench.width=1513
+package.divider.horizontal=0.5998681608437706
+package.divider.vertical=0.8207426376440461
+package.editor.height=634
+package.editor.width=1423
+package.editor.x=235
+package.editor.y=145
+package.frame.height=881
+package.frame.width=1553
+package.numDependencies=0
+package.numTargets=1
+package.showExtends=true
+package.showUses=true
+readme.height=60
+readme.name=@README
+readme.width=49
+readme.x=10
+readme.y=10
+target1.height=50
+target1.name=EcoSafariGUI
+target1.showInterface=false
+target1.type=ClassTarget
+target1.width=170
+target1.x=20
+target1.y=150
