@@ -18,7 +18,6 @@ public class Alientest
     /**
      * Default constructor for test class Alientest
      */
-    public Alientest(){}
         //testeamos que se mueva correctamente
         @Test 
         public void correctmove(){

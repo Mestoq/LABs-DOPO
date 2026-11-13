@@ -1,5 +1,5 @@
 package domain;
-
+import java.lang.*;
 
 /**
  * Write a description of class EcoSafariException here.

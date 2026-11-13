@@ -14,6 +14,12 @@ public class EcoSafariGUI extends JFrame{
     private JPanel  controlPanel;
     private PhotoEcoSafari photo;
     private EcoSafari theEcoSafari;
+    private JMenuItem itemNew;
+    private JMenuItem itemOpen;
+    private JMenuItem itemSaveAs;
+    private JMenuItem itemImport;
+    private JMenuItem itemExportAs;
+    private JMenuItem itemExit;
    
     
     public EcoSafariGUI() {
@@ -21,20 +27,8 @@ public class EcoSafariGUI extends JFrame{
         SIZE=theEcoSafari.getSize();
         prepareElements();
         prepareActions();
-        prepareView();
     }
 
-
-    private void prepareView() {
-		Dimension pantalla = Toolkit.getDefaultToolkit().getScreenSize();
-		setSize(pantalla.width / 2, pantalla.height / 2);
-		setLocationRelativeTo(null);
-		setLayout(new BorderLayout(5, 5));
-
-		JMenuBar safariMenu = prepareViewMenu();
-		prepareControllerMenu(safariMenu);
-
-    }
     private void prepareElements() {
         setTitle("EcoSafari");
         photo=new PhotoEcoSafari(this);
@@ -42,14 +36,121 @@ public class EcoSafariGUI extends JFrame{
         setLayout(new BorderLayout());
         add(photo,BorderLayout.NORTH);
         add(ticTacButton,BorderLayout.SOUTH);
-        setSize(new Dimension(SIDE*SIZE+15,SIDE*SIZE+72)); 
+        prepareViewMenu();
+        setSize(new Dimension(SIDE*SIZE+15,SIDE*SIZE+72+25));
         setResizable(false);
         photo.repaint();
+    }
+
+    /**
+     * Con este creamos la barra de menú con el menú Archivo
+     * con los separators como requisito
+     */
+    private void prepareViewMenu() {
+        JMenuBar safariMenu = new JMenuBar();
+        JMenu archivo = new JMenu("Archivo");
+
+        itemNew      = new JMenuItem("Nuevo");
+        itemOpen     = new JMenuItem("Abrir");
+        itemSaveAs   = new JMenuItem("Salvar como");
+        itemImport   = new JMenuItem("Importar");
+        itemExportAs = new JMenuItem("Exportar como");
+        itemExit     = new JMenuItem("Salir");
+
+        archivo.add(itemNew);
+        archivo.addSeparator();
+        archivo.add(itemOpen);
+        archivo.addSeparator();
+        archivo.add(itemSaveAs);
+        archivo.addSeparator();
+        archivo.add(itemImport);
+        archivo.addSeparator();
+        archivo.add(itemExportAs);
+        archivo.addSeparator();
+        archivo.add(itemExit);
+        safariMenu.add(archivo);
+        setJMenuBar(safariMenu);
     }
 
     private void prepareActions(){
         setDefaultCloseOperation(EXIT_ON_CLOSE);       
         ticTacButton.addActionListener(e-> ticTacButtonAction());
+        prepareControllerMenu();
+    }
+
+    private void prepareControllerMenu() {
+        itemNew.addActionListener(e -> optionNew());
+        itemOpen.addActionListener(e -> optionOpen());
+        itemSaveAs.addActionListener(e -> optionSaveAs());
+        itemImport.addActionListener(e -> optionImport());
+        itemExportAs.addActionListener(e -> optionExportAs());
+        itemExit.addActionListener(e -> optionExit());
+    }
+
+    /** Nuevo: crea un safari nuevo y lo redibuja. */
+    private void optionNew() {
+        theEcoSafari = new EcoSafari();
+        photo.repaint();
+    }
+
+    /** Salir: termina la aplicación (sin confirmación). */
+    private void optionExit() {
+        System.exit(0);
+    }
+
+    /** Abrir: elige un archivo y delega en el modelo. */
+    private void optionOpen() {
+        JFileChooser chooser = new JFileChooser();
+        if (chooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
+            try {
+                theEcoSafari.open(chooser.getSelectedFile());
+                photo.repaint();
+            } catch (EcoSafariException ex) {
+                showMessage(ex.getMessage());
+            }
+        }
+    }
+
+    /** Salvar como: elige destino y delega en el modelo. */
+    private void optionSaveAs() {
+        JFileChooser chooser = new JFileChooser();
+        if (chooser.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
+            try {
+                theEcoSafari.saveAs(chooser.getSelectedFile());
+            } catch (EcoSafariException ex) {
+                showMessage(ex.getMessage());
+            }
+        }
+    }
+
+    /** Importar: elige un archivo de texto y delega en el modelo. */
+    private void optionImport() {
+        JFileChooser chooser = new JFileChooser();
+        if (chooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
+            try {
+                theEcoSafari.importAs(chooser.getSelectedFile());
+                photo.repaint();
+            } catch (EcoSafariException ex) {
+                showMessage(ex.getMessage());
+            }
+        }
+    }
+
+    /** Exportar como: elige destino y delega en el modelo. */
+    private void optionExportAs() {
+        JFileChooser chooser = new JFileChooser();
+        if (chooser.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
+            try {
+                theEcoSafari.exportAs(chooser.getSelectedFile());
+            } catch (EcoSafariException ex) {
+                showMessage(ex.getMessage());
+            }
+        }
+    }
+
+    /** Único punto de salida de mensajes al usuario. */
+    private void showMessage(String message) {
+        JOptionPane.showMessageDialog(this, message, "EcoSafari", JOptionPane.INFORMATION_MESSAGE);
     }
 
     private void ticTacButtonAction() {
@@ -65,82 +166,8 @@ public class EcoSafariGUI extends JFrame{
         EcoSafariGUI cg=new EcoSafariGUI();
         cg.setVisible(true);
     }  
-    private void openAction() {
-		JFileChooser fileChooser = new JFileChooser();
-		int seleccion = fileChooser.showOpenDialog(this);
 
-		if (seleccion == JFileChooser.APPROVE_OPTION) {
-			File archivoSeleccionado = fileChooser.getSelectedFile();
-			JOptionPane.showMessageDialog(
-					this,
-					"La funcion de abrir está en construcción.\nArchivo seleccionado: " + archivoSeleccionado.getName(),
-					"En construcción",
-					JOptionPane.INFORMATION_MESSAGE
-			);
-		}
-	}
 
-    private void actionSave() {
-		JFileChooser fileChooser = new JFileChooser();
-		int seleccion = fileChooser.showSaveDialog(this);
-
-		if (seleccion == JFileChooser.APPROVE_OPTION) {
-			File archivoSeleccionado = fileChooser.getSelectedFile();
-			JOptionPane.showMessageDialog(
-					this,
-					"La funcionalidad de GUARDAR está en construcción.\nArchivo seleccionado: " + archivoSeleccionado.getName(),
-					"En construcción",
-					JOptionPane.INFORMATION_MESSAGE
-			);
-		}
-    }
-    private void prepareControllerMenu(JMenuBar safariMenu) {
-		JMenu archivo = safariMenu.getMenu(0);
-		
-		archivo.getItem(0).addActionListener(new ActionListener() {
-    		@Override
-    		public void actionPerformed(ActionEvent e) {
-        		newGame();
-    		}
-		});
-
-		archivo.getItem(1).addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				openAction();
-			}
-		});
-
-		archivo.getItem(2).addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				actionSave();
-			}
-		});
-
-		archivo.getItem(3).addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				confirmExit();
-			}
-		});
-    }
-    private JMenuBar prepareViewMenu() {
-		JMenuBar safariMenu = new JMenuBar();
-
-		JMenu archivo = new JMenu("Menu");
-		archivo.add(new JMenuItem("Nuevo"));
-		archivo.add(new JMenuItem("Abrir"));
-		archivo.add(new JMenuItem("Salvar como"));
-		archivo.add(new JMenuItem("Importar"));
-		archivo.add(new JMenuItem("Exportar como"));
-		archivo.add(new JMenuItem("Salir"));
-
-		safariMenu.add(archivo);
-		setJMenuBar(safariMenu);
-
-		return safariMenu;
-	}
     class PhotoEcoSafari extends JPanel{
         private EcoSafariGUI gui;
     

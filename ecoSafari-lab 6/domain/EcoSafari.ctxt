@@ -1,11 +1,20 @@
 #BlueJ class context
-#Sun Sep 27 22:20:28 COT 2026
+#Thu Nov 12 22:07:07 COT 2026
 comment0.target=EcoSafari
 comment1.target=EcoSafari()
 comment1.text=\r\n Constructs a new EcoSafari\r\n
 comment10.target=Elephant findElephant()
 comment11.target=void ticTac()
 comment11.text=\r\n Advances the simulation by one time step\r\n
+comment12.params=file
+comment12.target=EcoSafari open(java.io.File)
+comment13.params=file
+comment13.target=void saveAs(java.io.File)
+comment14.params=file
+comment14.target=java.io.File importAs(java.io.File)
+comment14.text=\r\n importa un archivo tipo file y en este caso lanzala excepcion ya que esta en contruccion, en la parte de presentacion se maneja lo del menu desplegable y todo \r\n
+comment15.params=file
+comment15.target=void ExportAs(java.io.File)
 comment2.target=void someEntities()
 comment2.text=\r\n Pupulates the EcoSafari with some entities\r\n
 comment3.params=row column height width
@@ -26,4 +35,4 @@ comment8.text=\r\n Places an entity at a specified position\r\n
 comment9.params=e
 comment9.target=int[] find(Entity)
 comment9.text=\r\n Finds the position of a specified entity\r\n
-numComments=12
+numComments=16

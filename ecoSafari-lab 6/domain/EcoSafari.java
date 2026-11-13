@@ -168,7 +168,7 @@ public class EcoSafari{
         throw new EcoSafariException("opcion import as en contruccion. Archivo " + file.getName());
     }
     //
-    public void ExportAs(File file) throws EcoSafariException{
+    public void exportAs(File file) throws EcoSafariException{
         throw new EcoSafariException("opcion export as en contruccion. Archivo " + file.getName());
     }
 }
