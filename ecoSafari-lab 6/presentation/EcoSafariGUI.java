@@ -5,6 +5,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
+// para importar archivos se utilizo 
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class EcoSafariGUI extends JFrame{  
     public static final int SIDE=20;
@@ -97,13 +99,20 @@ public class EcoSafariGUI extends JFrame{
     private void optionExit() {
         System.exit(0);
     }
-
-    /** Abrir: elige un archivo y delega en el modelo. */
-    private void optionOpen() {
+    /** crea un selector de archivos que solo muestra los .dat */
+    private JFileChooser datChooser(){
         JFileChooser chooser = new JFileChooser();
+        chooser.setAcceptAllFileFilterUsed(false);
+        chooser.setFileFilter(new FileNameExtensionFilter(" Archivos de Ecosafari (*.dat)", "dat"));
+        return chooser;
+    }
+    
+    /** Abrir: elige un archivo y delega en el modelo, despues se remplaza en el safari actual */
+    private void optionOpen() {
+        JFileChooser chooser = datChooser();
         if (chooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
             try {
-                theEcoSafari.open(chooser.getSelectedFile());
+                theEcoSafari = theEcoSafari.open(chooser.getSelectedFile());
                 photo.repaint();
             } catch (EcoSafariException ex) {
                 showMessage(ex.getMessage());
@@ -113,35 +122,48 @@ public class EcoSafariGUI extends JFrame{
 
     /** Salvar como: elige destino y delega en el modelo. */
     private void optionSaveAs() {
-        JFileChooser chooser = new JFileChooser();
+        JFileChooser chooser = datChooser();
         if (chooser.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
+            File file = chooser.getSelectedFile();
+            if (!file.getName().toLowerCase().endsWith(".dat")){
+                file = new File(file.getParentFile(), file.getName()+".dat");
+            }
             try {
-                theEcoSafari.saveAs(chooser.getSelectedFile());
+                theEcoSafari.saveAs(file);
             } catch (EcoSafariException ex) {
                 showMessage(ex.getMessage());
             }
         }
     }
-
+    /** crea un selector de archivos con solo txt */
+    private JFileChooser txtChooser() {
+        JFileChooser chooser = new JFileChooser();
+        chooser.setAcceptAllFileFilterUsed(false);
+        chooser.setFileFilter(new FileNameExtensionFilter("archivos de texto (*.txt)"));
+        return chooser;
+    }
+    /** Exportar como: elige destino con extension txt y delega en el modelo. */
+    private void optionExportAs() {
+        JFileChooser chooser = txtChooser();
+        if (chooser.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
+            File file = chooser.getSelectedFile();
+            if(!file.getName().toLowerCase().endsWith(".txt")){
+                file = new File(file.getParentFile(), file.getName() + ".txt");
+            }
+            try {
+                theEcoSafari.exportAs(file);
+            } catch (EcoSafariException ex) {
+                showMessage(ex.getMessage());
+            }
+        }
+    }
     /** Importar: elige un archivo de texto y delega en el modelo. */
     private void optionImport() {
-        JFileChooser chooser = new JFileChooser();
+        JFileChooser chooser = txtChooser();
         if (chooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
             try {
-                theEcoSafari.importAs(chooser.getSelectedFile());
+                theEcoSafari.import_(chooser.getSelectedFile());
                 photo.repaint();
-            } catch (EcoSafariException ex) {
-                showMessage(ex.getMessage());
-            }
-        }
-    }
-
-    /** Exportar como: elige destino y delega en el modelo. */
-    private void optionExportAs() {
-        JFileChooser chooser = new JFileChooser();
-        if (chooser.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
-            try {
-                theEcoSafari.exportAs(chooser.getSelectedFile());
             } catch (EcoSafariException ex) {
                 showMessage(ex.getMessage());
             }

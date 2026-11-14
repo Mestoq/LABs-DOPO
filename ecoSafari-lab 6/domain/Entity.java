@@ -1,8 +1,8 @@
 package domain;
 import java.awt.Color;
-
-//Include the documentation
-public interface Entity{
+import java.io.Serializable;
+//basicamente ahora lo que hicimos es que volvimos entity serializable entonces land, grass, storm y stormMark se vuelven tambien serializabkes
+public interface Entity extends Serializable{
    public static final int SQUARE = 2;
    public static final int ROUND = 1;
     

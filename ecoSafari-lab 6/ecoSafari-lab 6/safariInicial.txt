@@ -1,0 +1,9 @@
+Alienelephant 2, 2
+Robot 4, 4
+Elephant 5, 5
+Alienelephant 7, 7
+Elephant 10, 10
+Storm 15, 15
+Bush 18, 18
+Bush 20, 20
+Robot 24, 24

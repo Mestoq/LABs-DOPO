@@ -1,0 +1,7 @@
+Elephant 10, 20
+Bush 15, 15
+Storm 5, 5
+Zebra 3, 3
+Lion 8, 20
+Grass 20, 2
+Land 21, 2

@@ -1,7 +1,7 @@
 package domain;
-
-public abstract class Organism{
-    
+import java.io.Serializable;
+//tuvimos que hacer organism implemente serializable ya que si cuando abrimos el archivo el constructor de organism deja la energia en 100 para todos los organismos
+public abstract class Organism implements Serializable{
     private int energy; //Inv: 0<=energy<=100   
    
     /**Create a new Organism

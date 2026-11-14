@@ -1,0 +1,9 @@
+#BlueJ class context
+#Sat Nov 14 03:27:42 CST 2026
+comment0.target=Exportimportacceptance
+comment0.text=\r\n Write a description of class Exportimportacceptance here.\r\n \r\n @author (your name) \r\n @version (a version number or a date)\r\n
+comment1.params=args
+comment1.target=void main(java.lang.String[])
+comment2.params=safari
+comment2.target=int count(domain.EcoSafari)
+numComments=3

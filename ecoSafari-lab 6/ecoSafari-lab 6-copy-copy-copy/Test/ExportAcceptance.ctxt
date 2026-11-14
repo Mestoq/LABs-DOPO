@@ -1,0 +1,10 @@
+#BlueJ class context
+#Sat Nov 14 03:18:23 CST 2026
+comment0.target=ExportAcceptance
+comment0.text=\r\n Prueba de aceptacion 3\: iniciar la aplicacion y exportar como safari0ne.txt.\r\n Muestra la aplicacion y, a su lado, el contenido del archivo exportado.\r\n
+comment1.params=args
+comment1.target=void main(java.lang.String[])
+comment2.params=file title x y
+comment2.target=void showFile(java.io.File, java.lang.String, int, int)
+comment2.text=Abre una ventana con el contenido del archivo de texto.
+numComments=3

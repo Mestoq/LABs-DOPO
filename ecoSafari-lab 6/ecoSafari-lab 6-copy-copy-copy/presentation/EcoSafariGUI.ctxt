@@ -1,0 +1,35 @@
+#BlueJ class context
+#Sat Nov 14 02:59:23 CST 2026
+comment0.target=EcoSafariGUI
+comment1.target=EcoSafariGUI()
+comment10.target=void optionSaveAs()
+comment10.text=Salvar como\: elige destino y delega en el modelo.
+comment11.target=javax.swing.JFileChooser txtChooser()
+comment11.text=crea un selector de archivos con solo txt
+comment12.target=void optionExportAs()
+comment12.text=Exportar como\: elige destino con extension txt y delega en el modelo.
+comment13.target=void optionImport()
+comment13.text=Importar\: elige un archivo de texto y delega en el modelo.
+comment14.params=message
+comment14.target=void showMessage(java.lang.String)
+comment14.text=\u00DAnico punto de salida de mensajes al usuario.
+comment15.target=void ticTacButtonAction()
+comment16.target=domain.EcoSafari gettheEcoSafari()
+comment17.params=safari
+comment17.target=void settheEcoSafari(domain.EcoSafari)
+comment18.params=args
+comment18.target=void main(java.lang.String[])
+comment2.target=void prepareElements()
+comment3.target=void prepareViewMenu()
+comment3.text=\r\n Con este creamos la barra de men\u00FA con el men\u00FA Archivo\r\n con los separators como requisito\r\n
+comment4.target=void prepareActions()
+comment5.target=void prepareControllerMenu()
+comment6.target=void optionNew()
+comment6.text=Nuevo\: crea un safari nuevo y lo redibuja.
+comment7.target=void optionExit()
+comment7.text=Salir\: termina la aplicaci\u00F3n (sin confirmaci\u00F3n).
+comment8.target=javax.swing.JFileChooser datChooser()
+comment8.text=crea un selector de archivos que solo muestra los .dat
+comment9.target=void optionOpen()
+comment9.text=Abrir\: elige un archivo y delega en el modelo, despues se remplaza en el safari actual
+numComments=19
