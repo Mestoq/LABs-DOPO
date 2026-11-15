@@ -1,7 +1,0 @@
-#BlueJ class context
-#Sat Nov 14 03:02:10 CST 2026
-comment0.target=openAcceptance
-comment0.text=\r\n Prueba de aceptacion de Abrir\: iniciar la aplicacion, crear un nuevo estado\r\n y abrir el archivo safariOne.dat.\r\n
-comment1.params=args
-comment1.target=void main(java.lang.String[])
-numComments=2

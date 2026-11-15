@@ -1,46 +1,38 @@
 package Test;
 
 import domain.*;
+import presentation.*;
+import javax.swing.*;
 import java.io.File;
-import static org.junit.jupiter.api.Assertions.*;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Test;
 
 /**
- * Write a description of class openAcceptance here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
+ * Prueba de aceptacion de Abrir: iniciar la aplicacion, crear un nuevo estado
+ * y abrir el archivo safariOne.dat.
  */
 public class openAcceptance
 {
-    // prueba de aceptacion de iniciar el safari avanzar dos tic.tac, gaurdar como safariOne.dat y crear un nuevo safari y abrir el archivo
-    private final File file = new File("safariOne.dat");
+    public static void main(String[] args) throws Exception{
+        File file = new File("safariOne.dat");
 
-    @AfterEach
-    public void deleteFile()
-    {
-        if(file !=null){
-            file.delete();
-        }
-    }
+        // se guarda safariOne.dat
+        EcoSafari saved = new EcoSafari();
+        new Elephant(saved, 5, 5);
+        new Alienelephant(saved, 2, 2);
+        new Bush(saved, 18, 18);
+        new Storm(saved, 15, 15);
+        saved.ticTac();
+        saved.ticTac();
+        saved.saveAs(file);
 
-    @Test
-    public void shouldrecoverthesameentities() throws Exception{
-        EcoSafari safari = new EcoSafari();
-        safari.ticTac();
-        safari.ticTac();
-        safari.saveAs(file);
-        assertTrue(file.exists());
-        System.out.println("safariOne.dat ocupa " + file.length() +"bytes");
-        EcoSafari fresh = new EcoSafari();
-        EcoSafari opened = fresh.open(file);
-        for (int r = 0; r< safari.getSize(); r++){
-            for (int c=0; c<safari.getSize(); c++){
-                Entity a = safari.get(r,c);
-                Entity b = opened.get(r,c);
-                assertEquals(a== null ? null : a.getClass(), b==null ? null : b.getClass());
-            }
-        }
+        // se inicia de nuevo ecosafari
+        EcoSafariGUI gui = new EcoSafariGUI();
+        gui.settheEcoSafari(new EcoSafari());
+        gui.setTitle("nuevo ecosafari");
+        gui.setVisible(true);
+        JOptionPane.showMessageDialog(gui, " Aceptar para abrir safariOne.dat");
+
+        // abre safariOne.dat
+        gui.settheEcoSafari(gui.gettheEcoSafari().open(file));
+        gui.setTitle("safariOne.dat ABIERTO");
     }
 }

@@ -1,7 +1,7 @@
 #BlueJ class context
-#Fri Nov 13 23:35:28 CST 2026
+#Sat Nov 14 03:28:18 CST 2026
 comment0.target=openAcceptance
-comment0.text=\r\n Write a description of class openAcceptance here.\r\n \r\n @author (your name) \r\n @version (a version number or a date)\r\n
-comment1.target=void deleteFile()
-comment2.target=void shouldrecoverthesameentities()
-numComments=3
+comment0.text=\r\n Prueba de aceptacion de Abrir\: iniciar la aplicacion, crear un nuevo estado\r\n y abrir el archivo safariOne.dat.\r\n
+comment1.params=args
+comment1.target=void main(java.lang.String[])
+numComments=2

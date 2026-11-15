@@ -1,7 +1,0 @@
-#BlueJ class context
-#Sat Nov 14 03:08:47 CST 2026
-comment0.target=EcoSafariException
-comment0.text=\r\n Write a description of class EcoSafariException here.\r\n\r\n @author (your name)\r\n @version (a version number or a date)\r\n
-comment1.params=message
-comment1.target=EcoSafariException(java.lang.String)
-numComments=2

@@ -1,9 +1,0 @@
-#BlueJ class context
-#Sat Nov 14 03:08:47 CST 2026
-comment0.target=Alienelephant
-comment1.params=habitat row column
-comment1.target=Alienelephant(EcoSafari, int, int)
-comment2.target=java.awt.Color getColor()
-comment3.target=void tic()
-comment4.target=void tac()
-numComments=5

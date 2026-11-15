@@ -34,6 +34,7 @@ public class robottest
     @Test
     public void energylost(){
             EcoSafari safari = new EcoSafari();
+            Elephant elephant = new Elephant(safari, 5, 5);
             Robot robot = new Robot(safari, 24, 24);
             robot.tic();
             assertEquals(95, robot.getEnergy());
@@ -42,6 +43,7 @@ public class robottest
     @Test
     public void robotmoves(){
             EcoSafari safari = new EcoSafari();
+            Elephant elephant = new Elephant(safari, 5, 5);
             Robot robot = new Robot(safari, 10, 10);
             robot.tic();
             assertEquals(robot, safari.get(9, 9));

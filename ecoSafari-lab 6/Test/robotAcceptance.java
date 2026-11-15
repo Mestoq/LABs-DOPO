@@ -14,6 +14,7 @@ public class robotAcceptance
     public static void main(String[] args){
         EcoSafariGUI gui = new EcoSafariGUI();
         EcoSafari safari = gui.gettheEcoSafari();
+        Elephant elephant = new Elephant(safari, 5, 5);
         Robot robot = new Robot(safari, 10, 5);
         gui.setVisible(true);
         safari.ticTac();
