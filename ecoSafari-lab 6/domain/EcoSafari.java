@@ -3,12 +3,19 @@ import java.io.*;
 import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Modifier;
 public class EcoSafari implements Serializable{
  
     private static final int SIZE=25;
     private Entity[][] cells;
     //adicionamos este atributo que son los tipos que pueden ser importados o exportados
     private static final List<String> TYPES =Arrays.asList("Elephant", "Alienelephant","Bush", "Storm", "Robot", "Zebra", "Lion", "Grass", "Land");
+    /** 
+     * Paquete donde viven las entidades el cual es calculado y  no escrito a mano 
+     */
+    private static final String PACKAGE = EcoSafari.class.getName().substring(0, EcoSafari.class.getName().lastIndexOf('.') + 1);
     /**
      * Constructs a new EcoSafari
      */
@@ -357,7 +364,7 @@ public class EcoSafari implements Serializable{
             for (int row = 0; row < SIZE; row++){
                 for (int column = 0; column < SIZE; column++){
                     Entity e = cells[row][column];
-                    if (e != null && TYPES.contains(e.getClass().getSimpleName())){
+                    if (e != null && entityConstructor(e.getClass().getSimpleName()) != null){
                         out.write(e.getClass().getSimpleName() + " " + row + ", " + column);
                         out.newLine();
                     }
@@ -390,7 +397,7 @@ public class EcoSafari implements Serializable{
     /** importara elementos desde un .txt con errores detallados
      *  ademas es atomica,osea, si alguna línea es inválida no se agrega ningún elemento atiende excepciones
      */
-    public void import_(File file) throws EcoSafariException{
+    public void import02(File file) throws EcoSafariException{
         checkImportSource(file);
         List<Item> items = new ArrayList<Item>();
         try (BufferedReader in = new BufferedReader(new FileReader(file))){
@@ -460,5 +467,162 @@ public class EcoSafari implements Serializable{
         }
         return new Item(parts[0], row, column);
     }
+
+    /** Importara elementos desde un .txt y  funciona como un minicompilador al revisa todo el
+     *  archivo y reporta cada error con número de línea, palabra y la causa
+     *  ademas de que es atomica ya que si hay algún error no se agrega ningún elemento. 
+     */
+    public void import03(File file) throws EcoSafariException{
+        checkImportSource(file);
+        List<Item> items = new ArrayList<Item>();
+        List<String> errors = new ArrayList<String>();
+        try (BufferedReader in = new BufferedReader(new FileReader(file))){
+            String line;
+            int number = 0;
+            while ((line = in.readLine()) != null){
+                number++;                       // cuenta también las líneas en blanco
+                line = line.trim();
+                if (!line.isEmpty()){
+                    Item item = parseLine(line, number, errors, TYPES::contains);
+                    if (item != null){
+                        items.add(item);
+                    }
+                }
+            }
+        } catch (IOException e){
+            throw new EcoSafariException(EcoSafariException.IMPORT_ERROR + file.getName());
+        }
+        if (!errors.isEmpty()){
+            throw importErrors(file, errors);
+        }
+        if (items.isEmpty()){
+            throw new EcoSafariException(EcoSafariException.IMPORT_ERROR
+                    + EcoSafariException.EMPTY_FILE + file.getName());
+        }
+        for (Item item : items){
+            create(item);
+        }
+    }
+
+    /** Analiza una línea con el formato "Tipo fila, columna" y pues si hay error lo agrega a la lista y retorna null. */
+    private Item parseLine(String line, int number, List<String> errors, Predicate<String> knownType){
+        String[] parts = line.split("\\s+", 2);
+        if (parts.length != 2){
+            errors.add(lineError(number, EcoSafariException.BAD_FORMAT, line));
+            return null;
+        }
+        if (!knownType.test(parts[0])){
+            errors.add(lineError(number, EcoSafariException.UNKNOWN_TYPE, parts[0]));
+            return null;
+        }
+        String[] position = parts[1].split(",");
+        if (position.length != 2){
+            errors.add(lineError(number, EcoSafariException.BAD_FORMAT, parts[1]));
+            return null;
+        }
+        String rowText = position[0].trim();
+        String columnText = position[1].trim();
+        int row;
+        int column;
+        try {
+            row = Integer.parseInt(rowText);
+        } catch (NumberFormatException e){
+            errors.add(lineError(number, EcoSafariException.BAD_NUMBER, rowText));
+            return null;
+        }
+        try {
+            column = Integer.parseInt(columnText);
+        } catch (NumberFormatException e){
+            errors.add(lineError(number, EcoSafariException.BAD_NUMBER, columnText));
+            return null;
+        }
+        if (!isInside(row, column)){
+            String word = isInside(row, 0) ? columnText : rowText;  // la coordenada que se sale
+            errors.add(lineError(number, EcoSafariException.OUT_OF_BOARD, word));
+            return null;
+        }
+        return new Item(parts[0], row, column);
+    }
+
+    private static String lineError(int number, String cause, String word){
+        return "línea " + number + ": " + cause + "'" + word + "'";
+    }
+
+    /** Arma una sola excepción con todos los errores encontrados, uno por línea. */
+    private EcoSafariException importErrors(File file, List<String> errors){
+        StringBuilder message = new StringBuilder(EcoSafariException.IMPORT_ERROR + file.getName() + " (" + errors.size() + (errors.size() == 1 ? " error)" : " errores)"));
+        for (String error : errors){
+            message.append("\n  ").append(error);
+        }
+        return new EcoSafariException(message.toString());
+    }
+    
+    
+    /** Importara elementos desde un .txt y  funciona como un minicompilador al revisa todo el
+     *  archivo y reporta cada error con número de línea, palabra y la causa
+     *  ademas de que es atomica ya que si hay algún error no se agrega ningún elemento. 
+     */
+    public void import_(File file) throws EcoSafariException{
+        checkImportSource(file);
+        List<Item> items = new ArrayList<Item>();
+        List<String> errors = new ArrayList<String>();
+        try (BufferedReader in = new BufferedReader(new FileReader(file))){
+            String line;
+            int number = 0;
+            while ((line = in.readLine()) != null){
+                number++;
+                line = line.trim();
+                if (!line.isEmpty()){
+                    Item item = parseLine(line, number, errors, type -> entityConstructor(type) != null);
+                    if (item != null){
+                        items.add(item);
+                    }
+                }
+            }
+        } catch (IOException e){
+            throw new EcoSafariException(EcoSafariException.IMPORT_ERROR + file.getName());
+        }
+        if (!errors.isEmpty()){
+            throw importErrors(file, errors);
+        }
+        if (items.isEmpty()){
+            throw new EcoSafariException(EcoSafariException.IMPORT_ERROR + EcoSafariException.EMPTY_FILE + file.getName());
+        }
+        for (Item item : items){
+            create03(item);
+        }
+    }
+
+    /**
+     * Busca el constructor (EcoSafari, int, int) de la entidad con ese nombre simple
+     * y retorna null si el nombre no corresponde a una entidad que este definida
+     */
+    private static Constructor<?> entityConstructor(String typeName){
+        if (!typeName.matches("[A-Za-z][A-Za-z0-9_]*")){
+            return null;                                   // sin paquetes ni '$'
+        }
+        try {
+            Class<?> type = Class.forName(PACKAGE + typeName);
+            if (!Entity.class.isAssignableFrom(type) || type.isInterface() || Modifier.isAbstract(type.getModifiers())){
+                return null;
+            }
+            return type.getConstructor(EcoSafari.class, int.class, int.class);
+        } catch (ClassNotFoundException | NoSuchMethodException | LinkageError e){
+            return null;
+        }
+    }
+
+    /** Crea la entidad de un item a partir del nombre de su clase. */
+    private void create03(Item item) throws EcoSafariException{
+        Constructor<?> constructor = entityConstructor(item.type);
+        try {
+            constructor.newInstance(this, item.row, item.column);
+        } catch (ReflectiveOperationException | RuntimeException e){
+            throw new EcoSafariException(EcoSafariException.IMPORT_ERROR + EcoSafariException.CANNOT_CREATE + item.type);
+        }
+    }
+    
+
+
     
 }

@@ -36,6 +36,10 @@ public class EcoSafariException extends Exception{
     public static final String BAD_NUMBER        = "la posición no es numérica -> ";
     public static final String OUT_OF_BOARD      = "la posición está fuera del tablero -> ";
 
+    //Bono
+
+    public static final String CANNOT_CREATE = "no se pudo crear el elemento -> ";
+
 
     public EcoSafariException(String message){
         super(message);
